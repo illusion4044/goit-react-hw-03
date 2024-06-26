@@ -1,37 +1,41 @@
-import { useId } from 'react';
-import PropTypes from 'prop-types';
-import css from "./ContactForm.module.css";
+// src/ContactForm/ContactForm.jsx
+import React, { useState } from 'react';
+import styles from './ContactForm.module.css';
 
-export default function ContactForm({ onAdd }) {
-    const id = useId();
+function ContactForm({ onAdd }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onAdd({ id: Date.now().toString(), name, number });
+    setName('');
+    setNumber('');
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const form = event.target;
-
-        onAdd({
-            username: form.elements.username.value,
-            number: form.elements.number.value,
-        });
-    };
-
-    return (
-        <form className={css.form} onSubmit={handleSubmit}>
-            <div className={css.group}>
-                <label htmlFor={`username-${id}`} className={css.label}>Username:</label>
-                <input className={css.input} type="text" name="username" id={`username-${id}`}/>
-            </div>
-            <div className={css.group}>
-                <label id={`number-${id}`} className={css.label}>Number:</label>
-                <input className={css.input} 
-                type="text" name="number" id={`number-${id}`} />
-            </div>
-            <button type="submit">Add contact</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.group}>
+        <label className={styles.label}>Name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={styles.input}
+        />
+      </div>
+      <div className={styles.group}>
+        <label className={styles.label}>Number</label>
+        <input
+          type="text"
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
+          className={styles.input}
+        />
+      </div>
+      <button type="submit">Add Contact</button>
+    </form>
+  );
 }
 
-ContactForm.propTypes = {
-    onAdd: PropTypes.func.isRequired,
-};
+export default ContactForm;

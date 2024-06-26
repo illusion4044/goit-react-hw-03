@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+/* src/ContactForm/ContactForm.module.css */
 .form {
     display: flex;
     flex-direction: column;
@@ -10,20 +11,21 @@
     max-width: 400px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
-}
-
-.group {
+  }
+  
+  .group {
     display: flex;
     flex-direction: column;
     gap: 8px;
-}
-
-.label {
+  }
+  
+  .label {
     font-weight: bold;
-}
-
-.input {
+  }
+  
+  .input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
+  }
+  
