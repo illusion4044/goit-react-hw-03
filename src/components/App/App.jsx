@@ -6,12 +6,14 @@ import ContactForm from '../ContactForm/ContactForm';
 
 
 export default function App() {
-
+const addUser = (newUser) => {
+  console.log("Send to backend", newUser);
+};
   
   return (
     <div>
     <h1>Phonebook</h1>
-    <ContactForm />
+    <ContactForm onAdd={addUser}/>
     {/* <SearchBox />
     <ContactList /> */}
   </div>
