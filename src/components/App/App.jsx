@@ -10,19 +10,29 @@ const initialContacts = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
+
+
 export default function App() {
   const [contacts, setContacts] = useState(initialContacts);
 
   const addUser = (newUser) => {
-    console.log("Send to backend", newUser);
+
+
+    setContacts(prevContacts => [...prevContacts, newUser]);
+  };
+
+  const deleteUser = (id) => {
+    setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
+
   };
 
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addUser} />
-      <ContactList contacts={contacts} />
-      {/* <SearchBox /> */}
+
+
+      <ContactList contacts={contacts} onDelete={deleteUser} />
     </div>
   );
 }
