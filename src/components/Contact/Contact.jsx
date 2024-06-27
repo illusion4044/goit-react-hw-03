@@ -1,4 +1,3 @@
-// src/Contact/Contact.jsx
 import React from "react";
 import css from "./Contact.module.css";
 
