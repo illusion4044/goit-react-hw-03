@@ -3,7 +3,7 @@ import React from 'react';
 import Contact from '../Contact/Contact';
 import styles from './ContactList.module.css';
 
-function ContactList({ contacts, onDelete }) {
+export default function ContactList({ contacts, onDelete }) {
   return (
     <ul className={styles.contactList}>
       {contacts.map(({ id, name, number }) => (
@@ -14,4 +14,4 @@ function ContactList({ contacts, onDelete }) {
   );
 }
 
-export default ContactList;
+
