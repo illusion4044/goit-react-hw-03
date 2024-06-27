@@ -1,9 +1,9 @@
-// src/App/App.jsx
-import React, { useState, useEffect } from 'react';
-import ContactForm from '../ContactForm/ContactForm';
-import ContactList from '../ContactList/ContactList';
-import SearchBox from '../SearchBox/SearchBox';
 
+import React, { useState, useEffect } from "react";
+import ContactForm from "../ContactForm/ContactForm";
+import ContactList from "../ContactList/ContactList";
+import SearchBox from "../SearchBox/SearchBox";
+import css from "./App.module.css";
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -14,14 +14,14 @@ const initialContacts = [
 
 export default function App() {
   const [contacts, setContacts] = useState(() => {
-    // Зчитування контактів з локального сховища при старті додатку
+    
     const savedContacts = localStorage.getItem('contacts');
     return savedContacts ? JSON.parse(savedContacts) : initialContacts;
   });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    // Збереження контактів у локальне сховище при зміні стану контактів
+    
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <div >
-      <h1>Phonebook</h1>
+      <h1 className={css.MainTitle}>Phonebook</h1>
       <ContactForm onAdd={addUser} />
       <SearchBox filter={filter} onFilterChange={handleFilterChange} />
       <ContactList contacts={filteredContacts} onDelete={deleteUser} />
