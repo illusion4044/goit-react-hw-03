@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
+import SearchBox from '../SearchBox/SearchBox';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -10,29 +11,32 @@ const initialContacts = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-
-
 export default function App() {
   const [contacts, setContacts] = useState(initialContacts);
+  const [filter, setFilter] = useState('');  // Додано стан для фільтра
 
   const addUser = (newUser) => {
-
-
-    setContacts(prevContacts => [...prevContacts, newUser]);
+    setContacts((prevContacts) => [...prevContacts, newUser]);
   };
 
   const deleteUser = (id) => {
-    setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
-
+    setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== id));
   };
+
+  const handleFilterChange = (filter) => {
+    setFilter(filter);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addUser} />
-
-
-      <ContactList contacts={contacts} onDelete={deleteUser} />
+      <SearchBox filter={filter} onFilterChange={handleFilterChange} />
+      <ContactList contacts={filteredContacts} onDelete={deleteUser} />  
     </div>
   );
 }
